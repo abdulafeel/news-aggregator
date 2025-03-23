@@ -35,9 +35,6 @@ const fetchNewsAPI = (query: string, fromDate?: string, category?: string, sourc
   );
 };
 
-
-
-
 // Fetch from The Guardian API with filters
 const fetchGuardianAPI = (query: string) =>
   fetchFromAPI(

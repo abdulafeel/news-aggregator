@@ -33,8 +33,8 @@ const FilterBar: React.FC = () => {
       <input
         type="text"
         name="query"
-        placeholder="Search articles..."
-        className="w-full md:w-auto border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        placeholder="🔍 Search articles..."
+        className="w-full md:w-auto border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
         value={filters.query}
         onChange={handleInputChange}
       />
@@ -42,14 +42,14 @@ const FilterBar: React.FC = () => {
       <input
         type="date"
         name="fromDate"
-        className="w-full md:w-auto border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full md:w-auto border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
         value={filters.fromDate}
         onChange={handleInputChange}
       />
 
       <select
         name="category"
-        className="w-full md:w-auto border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full md:w-auto border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
         value={filters.category}
         onChange={handleInputChange}
       >
@@ -64,17 +64,17 @@ const FilterBar: React.FC = () => {
       <input
         type="text"
         name="source"
-        placeholder="Source (e.g., BBC)"
-        className="w-full md:w-auto border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        placeholder="📡 Source (e.g., BBC)"
+        className="w-full md:w-auto border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
         value={filters.source}
         onChange={handleInputChange}
       />
 
       <button
-        className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 transition-all"
+        className="bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-md px-6 py-3 font-medium hover:opacity-90 transition-all"
         onClick={handleSearch}
       >
-        Search
+        🔎 Search
       </button>
     </div>
   );
