@@ -29,11 +29,13 @@ const fetchNewsAPI = (query: string, fromDate?: string, category?: string, sourc
       title: article.title,
       description: article.description,
       url: article.url,
-      source: typeof article.source === "object" && article.source.name ? article.source.name : "Unknown Source",
+      urlToImage: article.urlToImage, // ✅ Get the image
+      source: article.source.name,
       author: article.author || "Unknown",
     }))
   );
 };
+
 
 // Fetch from The Guardian API with filters
 const fetchGuardianAPI = (query: string) =>
