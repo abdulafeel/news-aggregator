@@ -3,68 +3,78 @@ import { NewsContext } from "../context/NewsContext";
 import { fetchAllNews } from "../services/api";
 
 const FilterBar: React.FC = () => {
-  const [query, setQuery] = useState("");
-  const [fromDate, setFromDate] = useState("");
-  const [category, setCategory] = useState("");
-  const [source, setSource] = useState("");
-  const newsContext = useContext(NewsContext);
+  const [filters, setFilters] = useState({
+    query: "",
+    fromDate: "",
+    category: "",
+    source: "",
+  });
 
+  const newsContext = useContext(NewsContext);
   if (!newsContext) return null;
+
   const { setArticles } = newsContext;
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
+  };
+
   const handleSearch = async () => {
-    if (!query) {
+    if (!filters.query) {
       alert("Please enter a search term!");
       return;
     }
-  
-    const results = await fetchAllNews(query);
+    const results = await fetchAllNews(filters.query, filters.fromDate, filters.category, filters.source);
     setArticles(results);
   };
-  
-  
 
   return (
-    <div className="p-4 flex flex-wrap gap-4">
+    <div className="bg-white p-6 rounded-lg shadow-md flex flex-wrap items-center justify-between gap-4">
       <input
         type="text"
-        placeholder="Search by keyword..."
-        className="border p-2"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        name="query"
+        placeholder="Search articles..."
+        className="w-full md:w-auto border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        value={filters.query}
+        onChange={handleInputChange}
       />
 
       <input
         type="date"
-        className="border p-2"
-        value={fromDate}
-        onChange={(e) => setFromDate(e.target.value)}
+        name="fromDate"
+        className="w-full md:w-auto border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        value={filters.fromDate}
+        onChange={handleInputChange}
       />
 
       <select
-        className="border p-2"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
+        name="category"
+        className="w-full md:w-auto border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        value={filters.category}
+        onChange={handleInputChange}
       >
         <option value="">All Categories</option>
         <option value="business">Business</option>
-        <option value="entertainment">Entertainment</option>
+        <option value="sports">Sports</option>
         <option value="health">Health</option>
         <option value="science">Science</option>
-        <option value="sports">Sports</option>
         <option value="technology">Technology</option>
       </select>
 
       <input
         type="text"
-        placeholder="Filter by source (e.g., BBC, CNN)"
-        className="border p-2"
-        value={source}
-        onChange={(e) => setSource(e.target.value)}
+        name="source"
+        placeholder="Source (e.g., BBC)"
+        className="w-full md:w-auto border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        value={filters.source}
+        onChange={handleInputChange}
       />
 
-      <button className="bg-blue-500 text-white p-2" onClick={handleSearch}>
-        Apply Filters
+      <button
+        className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 transition-all"
+        onClick={handleSearch}
+      >
+        Search
       </button>
     </div>
   );

@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
-import { Article, NewsContext } from "../context/NewsContext";
+import { NewsContext } from "../context/NewsContext";
 import Header from "../components/Header";
 import FilterBar from "../components/FilterBar";
-import NewsCard from "../components/NewsCard";
+import NewsCard, { NewsCardProps } from "../components/NewsCard";
 
 const Home: React.FC = () => {
   const newsContext = useContext(NewsContext);
-
-  // Ensure newsContext is not null before using articles
   if (!newsContext) return null;
 
   const { articles } = newsContext;
@@ -16,10 +14,14 @@ const Home: React.FC = () => {
     <div>
       <Header />
       <FilterBar />
-      <div className="grid grid-cols-3 gap-4 p-4">
-        {articles.map((article: Article, index: number) => (
-          <NewsCard key={index} article={article} />
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.length > 0 ? (
+          articles.map((article, index) => (
+            <NewsCard key={index} article={article} /> 
+          ))
+        ) : (
+          <p className="text-center text-gray-500 text-lg">No articles found. Try a different search.</p>
+        )}
       </div>
     </div>
   );

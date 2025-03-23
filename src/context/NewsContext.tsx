@@ -5,8 +5,8 @@ export interface Article {
   title: string;
   description: string;
   url: string;
-  source: { name: string };
-  author?: string;
+  source: string// ✅ Allow both formats
+  author: string;
 }
 
 interface Preferences {
