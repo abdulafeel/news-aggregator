@@ -14,6 +14,7 @@ const Home: React.FC = () => {
     <div className="container">
       <Header />
       <FilterBar />
+      <div className="mb-6"></div>
       <h2 className="text-3xl font-bold text-gray-900 mt-10 mb-6 text-center">🌟 Latest News</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article, index) => <NewsCard key={index} article={article} />)}
